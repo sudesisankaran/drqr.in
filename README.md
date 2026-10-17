@@ -1,4 +1,4 @@
-# MediQR — Medical Health Care Management System
+# DRQR — Medical Health Care Management System
 ### React (Vite) + Python Django REST Framework + Supabase PostgreSQL
 
 A complete, secure, production-oriented Medical Health Care Management System built exclusively for:

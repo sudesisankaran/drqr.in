@@ -60,7 +60,7 @@ const PatientQRModal = ({ isOpen, onClose, patient }) => {
         </head>
         <body onload="window.print()">
           <div class="card">
-            <h2>MediQR Health Network</h2>
+            <h2>DRQR Health Network</h2>
             <div class="sub">Official Permanent Patient QR Identity</div>
             <div style="margin: 12px 0;"><strong>${patient.full_name || patient.effective_full_name}</strong></div>
             <img src="${qrDataUrl}" alt="Permanent Patient QR" />

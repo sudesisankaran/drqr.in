@@ -24,7 +24,7 @@ const LandingPage = () => {
       <section className="relative pt-16 pb-20 sm:pt-24 sm:pb-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-500/10 border border-teal-500/25 text-teal-300 text-xs sm:text-sm font-semibold mb-6">
           <Sparkles className="w-4 h-4 text-teal-400" />
-          MediQR Healthcare Network &bull; Secure Digital Health Management
+          DRQR Healthcare Network &bull; Secure Digital Health Management
         </div>
 
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.1]">

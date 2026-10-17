@@ -1,6 +1,6 @@
-# MediQR Launcher Script
+# DRQR Launcher Script
 Write-Host "========================================================" -ForegroundColor Cyan
-Write-Host "  MediQR - Medical Health Care Management System" -ForegroundColor White
+Write-Host "  DRQR - Medical Health Care Management System" -ForegroundColor White
 Write-Host "  React + Django REST Framework + Supabase PostgreSQL" -ForegroundColor Cyan
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host ""

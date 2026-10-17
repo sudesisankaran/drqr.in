@@ -316,7 +316,7 @@ const HospitalDashboardPage = () => {
                     </td>
                     <td className="py-3.5 px-4">
                       <div>{pat.phone}</div>
-                      {pat.email && !pat.email.includes('@mediqr.local') && (
+                      {pat.email && !pat.email.includes('@drqr.local') && !pat.email.includes('@mediqr.local') && (
                         <div className="text-[11px] text-slate-400 truncate max-w-[140px]">{pat.email}</div>
                       )}
                     </td>

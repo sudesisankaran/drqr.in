@@ -184,7 +184,7 @@ const PublicVerifyPage = () => {
         )}
 
         <div className="pt-2 text-center text-[11px] text-slate-400">
-          Cryptographically timestamped on {new Date(data.created_at).toLocaleDateString()} &bull; MediQR Verification Registry
+          Cryptographically timestamped on {new Date(data.created_at).toLocaleDateString()} &bull; DRQR Verification Registry
         </div>
       </div>
 

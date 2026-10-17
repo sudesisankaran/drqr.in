@@ -72,11 +72,11 @@ class HospitalPatientRegistrationSerializer(serializers.Serializer):
                 is_new_patient = True
                 # Create user credentials safely
                 clean_phone_slug = re.sub(r'[^0-9]', '', phone) or uuid.uuid4().hex[:8]
-                user_email = email if email else f"patient.{clean_phone_slug}@mediqr.local"
+                user_email = email if email else f"patient.{clean_phone_slug}@drqr.local"
 
                 # Ensure unique email for user table
                 if User.objects.filter(email__iexact=user_email).exists():
-                    user_email = f"patient.{clean_phone_slug}.{secrets.token_hex(3)}@mediqr.local"
+                    user_email = f"patient.{clean_phone_slug}.{secrets.token_hex(3)}@drqr.local"
 
                 generated_password = secrets.token_urlsafe(16)
                 user = User.objects.create_user(

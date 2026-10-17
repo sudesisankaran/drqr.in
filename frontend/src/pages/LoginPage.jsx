@@ -7,6 +7,7 @@ import { loginSchema } from '../validation/schemas';
 import { useAuth } from '../context/AuthContext';
 import { extractErrorMessage } from '../services/api';
 import AlertMessage from '../components/common/AlertMessage';
+import DRQRLogo from '../components/common/DRQRLogo';
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -53,7 +54,10 @@ const LoginPage = () => {
 
   return (
     <div className="py-16 sm:py-24 max-w-md mx-auto px-4 sm:px-6">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 flex flex-col items-center">
+        <Link to="/" className="mb-4 inline-block group">
+          <DRQRLogo size="lg" showSubtitle={false} />
+        </Link>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20 text-xs font-semibold mb-3">
           <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
           Secure Healthcare Portal Authentication

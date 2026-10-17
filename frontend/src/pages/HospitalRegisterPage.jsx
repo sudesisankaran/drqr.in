@@ -7,6 +7,7 @@ import { hospitalRegistrationSchema } from '../validation/schemas';
 import { useAuth } from '../context/AuthContext';
 import { extractErrorMessage } from '../services/api';
 import AlertMessage from '../components/common/AlertMessage';
+import DRQRLogo from '../components/common/DRQRLogo';
 
 const HospitalRegisterPage = () => {
   const { registerHospital } = useAuth();
@@ -41,14 +42,17 @@ const HospitalRegisterPage = () => {
 
   return (
     <div className="py-12 max-w-4xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 flex flex-col items-center">
+        <Link to="/" className="mb-4 inline-block group">
+          <DRQRLogo size="lg" showSubtitle={false} />
+        </Link>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20 text-xs font-semibold mb-3">
           <Building2 className="w-3.5 h-3.5 text-teal-400" />
           Official Medical Center Registration
         </div>
         <h1 className="text-3xl font-extrabold text-white">Hospital Registration</h1>
         <p className="mt-2 text-slate-400 text-sm max-w-lg mx-auto">
-          Register your hospital or clinic facility to manage verified records, issue secure QR codes, and generate official medical documents.
+          Register your hospital or clinic facility with DRQR to manage verified records, issue secure QR codes, and generate official medical documents.
         </p>
       </div>
 

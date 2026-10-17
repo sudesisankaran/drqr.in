@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-teal-400" />
-            <span className="font-semibold text-slate-300">MediQR System</span>
+            <span className="font-semibold text-slate-300">DRQR System</span>
             <span>&bull;</span>
             <span>Production Medical Record Verification & Archival</span>
           </div>
@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-4 pt-4 border-t border-slate-900 text-center text-[11px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>© {new Date().getFullYear()} MediQR Healthcare System. All rights reserved. Exclusively for Hospital Registration, Patient Management, QR Verification & Clinical Dossier.</p>
+          <p>© {new Date().getFullYear()} DRQR Healthcare System. All rights reserved. Exclusively for Hospital Registration, Patient Management, QR Verification & Clinical Dossier.</p>
           <p className="text-slate-400">End-to-End Cryptographic Access Control</p>
         </div>
       </div>

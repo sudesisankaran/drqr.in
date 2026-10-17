@@ -122,7 +122,7 @@ const HospitalPatientDetailModal = ({
         </head>
         <body onload="window.print()">
           <div class="card">
-            <h2>MediQR Health Network</h2>
+            <h2>DRQR Health Network</h2>
             <div class="sub">Official Permanent Patient QR Identity</div>
             <div style="margin: 12px 0;"><strong>${data.patient.full_name}</strong></div>
             <img src="${qrImgUrl}" alt="Permanent Patient QR" />

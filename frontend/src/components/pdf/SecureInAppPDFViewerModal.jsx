@@ -177,7 +177,7 @@ const SecureInAppPDFViewerModal = ({
               Protected in-browser view. File download and print options are disabled.
             </span>
             <span className="font-mono text-slate-400">
-              MediQR Clinical Verification Engine
+              DRQR Clinical Verification Engine
             </span>
           </div>
         </div>

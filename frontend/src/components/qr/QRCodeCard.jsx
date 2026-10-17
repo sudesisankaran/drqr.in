@@ -29,7 +29,7 @@ const QRCodeCard = ({
 
     const url = canvas.toDataURL('image/png');
     const link = document.createElement('a');
-    link.download = `MediQR_${recordTitle?.replace(/\s+/g, '_') || 'Record'}_${recordId ? String(recordId).substring(0, 8) : 'QR'}.png`;
+    link.download = `DRQR_${recordTitle?.replace(/\s+/g, '_') || 'Record'}_${recordId ? String(recordId).substring(0, 8) : 'QR'}.png`;
     link.href = url;
     link.click();
   };

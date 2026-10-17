@@ -379,7 +379,7 @@ def generate_patient_summary_pdf_bytes(patient_profile, qr_identity, hospitals=N
     qr_buffer = io.BytesIO(qr_identity.generate_qr_png_bytes())
     qr_image = Image(qr_buffer, width=1.35 * inch, height=1.35 * inch)
 
-    hosp_name = requesting_hospital.hospital_name if requesting_hospital else "MediQR Healthcare System"
+    hosp_name = requesting_hospital.hospital_name if requesting_hospital else "DRQR Healthcare System"
 
     header_text = [
         Paragraph(f"<b>{hosp_name}</b>", title_style),

@@ -7,6 +7,7 @@ import { patientRegistrationSchema } from '../validation/schemas';
 import { useAuth } from '../context/AuthContext';
 import { extractErrorMessage } from '../services/api';
 import AlertMessage from '../components/common/AlertMessage';
+import DRQRLogo from '../components/common/DRQRLogo';
 
 const PatientRegisterPage = () => {
   const { registerPatient } = useAuth();
@@ -44,14 +45,17 @@ const PatientRegisterPage = () => {
 
   return (
     <div className="py-12 max-w-3xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 flex flex-col items-center">
+        <Link to="/" className="mb-4 inline-block group">
+          <DRQRLogo size="lg" showSubtitle={false} />
+        </Link>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-xs font-semibold mb-3">
           <User className="w-3.5 h-3.5 text-emerald-400" />
           Patient Personal Record Profile
         </div>
         <h1 className="text-3xl font-extrabold text-white">Patient Registration</h1>
         <p className="mt-2 text-slate-400 text-sm max-w-md mx-auto">
-          Create an individual patient record account to organize your hospital documents, generate digital QR certificates, and export verified PDFs.
+          Create an individual patient record account with DRQR to organize your hospital documents, generate digital QR certificates, and export verified PDFs.
         </p>
       </div>
 

@@ -15,6 +15,8 @@ import {
   Sparkles
 } from 'lucide-react';
 
+import DRQRLogo from './DRQRLogo';
+
 const Navbar = () => {
   const { user, isAuthenticated, logout, isHospital, isPatient } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,24 +36,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo & Brand */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-400 p-[1px] shadow-lg shadow-teal-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-slate-950 rounded-xl flex items-center justify-center">
-                <ShieldCheck className="w-6 h-6 text-teal-400 group-hover:text-emerald-300 transition-colors" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl sm:text-2xl tracking-tight text-white group-hover:text-teal-300 transition-colors">
-                  Medi<span className="text-teal-400">QR</span>
-                </span>
-                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20">
-                  <Sparkles className="w-2.5 h-2.5" /> Healthcare
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400 hidden sm:block tracking-wide">
-                Medical Records & QR Management
-              </p>
-            </div>
+            <DRQRLogo size="md" subtitle="Medical Health Network" />
           </Link>
 
           {/* Desktop Navigation Links */}

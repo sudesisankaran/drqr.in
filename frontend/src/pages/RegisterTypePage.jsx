@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Building2, User, ArrowRight, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import DRQRLogo from '../components/common/DRQRLogo';
 
 const RegisterTypePage = () => {
   return (
     <div className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6">
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 flex flex-col items-center">
+        <Link to="/" className="mb-4 inline-block group">
+          <DRQRLogo size="lg" showSubtitle={false} />
+        </Link>
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20 text-xs font-semibold mb-3">
           <ShieldCheck className="w-3.5 h-3.5 text-teal-400" />
-          Two Specialized Registration Workflows
+          DRQR Portal Registration
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-white">Select Account Type</h1>
         <p className="mt-2 text-slate-400 text-sm max-w-md mx-auto">
