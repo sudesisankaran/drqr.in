@@ -73,24 +73,53 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # Database configuration
 # Supabase PostgreSQL via DATABASE_URL or SQLite fallback
-DATABASE_URL = config('DATABASE_URL', default='').strip()
+import urllib.parse
 
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.parse(
-            DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-            ssl_require=True if 'supabase' in DATABASE_URL else False
-        )
+DATABASE_URL = config('DATABASE_URL', default='').strip().strip('"\'')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
+if DATABASE_URL and DATABASE_URL.startswith(('postgres://', 'postgresql://')):
+    if '[YOUR-PASSWORD]' in DATABASE_URL or '[YOUR_DATABASE_PASSWORD]' in DATABASE_URL:
+        print("Notice: DATABASE_URL contains placeholder password. Falling back to local SQLite.")
+    else:
+        try:
+            DATABASES['default'] = dj_database_url.parse(
+                DATABASE_URL,
+                conn_max_age=600,
+                conn_health_checks=True,
+                ssl_require=True if 'supabase' in DATABASE_URL else False
+            )
+        except Exception as parse_err:
+            print(f"Warning: Standard DATABASE_URL parse failed: {parse_err}. Attempting URL sanitization...")
+            try:
+                if '://' in DATABASE_URL and '@' in DATABASE_URL:
+                    scheme, remainder = DATABASE_URL.split('://', 1)
+                    auth, host_part = remainder.rsplit('@', 1)
+                    if ':' in auth:
+                        user, raw_pass = auth.split(':', 1)
+                        quoted_pass = urllib.parse.quote(raw_pass, safe='')
+                        sanitized_url = f"{scheme}://{user}:{quoted_pass}@{host_part}"
+                        DATABASES['default'] = dj_database_url.parse(
+                            sanitized_url,
+                            conn_max_age=600,
+                            conn_health_checks=True,
+                            ssl_require=True if 'supabase' in sanitized_url else False
+                        )
+                        print("Notice: Successfully parsed sanitized DATABASE_URL.")
+            except Exception as recovery_err:
+                print(f"Notice: DATABASE_URL recovery failed ({recovery_err}). Falling back to local SQLite.")
+                DATABASES = {
+                    'default': {
+                        'ENGINE': 'django.db.backends.sqlite3',
+                        'NAME': BASE_DIR / 'db.sqlite3',
+                    }
+                }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
