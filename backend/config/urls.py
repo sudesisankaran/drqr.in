@@ -39,6 +39,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('patient/qr/<uuid:public_uuid>', redirect_to_frontend_qr, name='qr-fallback-redirect'),
     path('patient/qr/<uuid:public_uuid>/', redirect_to_frontend_qr, name='qr-fallback-redirect-slash'),
+
+    # Standard /api/ prefix
     path('api/auth/', include('accounts.urls')),
     path('api/hospitals/', include('hospitals.urls')),
     path('api/hospital/patients/', include('hospitals.urls_patients')),
@@ -47,6 +49,15 @@ urlpatterns = [
     path('api/qr/', include('patients.urls_qr')),
     path('api/', include('records.urls')),
     path('api/records/', include('qr_documents.urls')),
+
+    # Dual route compatibility without /api/ prefix
+    path('auth/', include('accounts.urls')),
+    path('hospitals/', include('hospitals.urls')),
+    path('hospital/patients/', include('hospitals.urls_patients')),
+    path('patients/', include('patients.urls')),
+    path('patient/me/', include('patients.urls_patient_me')),
+    path('qr/', include('patients.urls_qr')),
+    path('records/', include('qr_documents.urls')),
 ]
 
 if settings.DEBUG:

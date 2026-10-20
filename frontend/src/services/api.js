@@ -1,6 +1,19 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const getNormalizedApiBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl || typeof envUrl !== 'string' || !envUrl.trim()) {
+    return '/api';
+  }
+  let cleaned = envUrl.trim().replace(/\/+$/, '');
+  // Auto-append /api if user gave backend root URL (e.g. https://drqr-backend.onrender.com)
+  if (/^https?:\/\//i.test(cleaned) && !cleaned.endsWith('/api')) {
+    cleaned = `${cleaned}/api`;
+  }
+  return cleaned;
+};
+
+const API_BASE_URL = getNormalizedApiBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -101,6 +114,9 @@ api.interceptors.response.use(
 
 export const extractErrorMessage = (error, fallback = 'An unexpected error occurred.') => {
   if (!error) return fallback;
+  if (error.response?.status === 404) {
+    return 'Backend service not found (404). Please ensure VITE_API_URL on Vercel points to your live Render backend URL (e.g. https://drqr-backend.onrender.com/api) and redeploy.';
+  }
   if (error.response?.data?.errors) {
     const errors = error.response.data.errors;
     if (typeof errors === 'object' && errors !== null) {
