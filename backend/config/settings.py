@@ -88,13 +88,16 @@ if DATABASE_URL and DATABASE_URL.startswith(('postgres://', 'postgresql://')):
     if '[YOUR-PASSWORD]' in DATABASE_URL or '[YOUR_DATABASE_PASSWORD]' in DATABASE_URL:
         print("Notice: DATABASE_URL contains placeholder password. Falling back to local SQLite.")
     else:
+        is_pooler = 'pooler.supabase.com' in DATABASE_URL or ':6543' in DATABASE_URL
         try:
             DATABASES['default'] = dj_database_url.parse(
                 DATABASE_URL,
-                conn_max_age=600,
-                conn_health_checks=True,
+                conn_max_age=0 if is_pooler else 600,
+                conn_health_checks=not is_pooler,
                 ssl_require=True if 'supabase' in DATABASE_URL else False
             )
+            if is_pooler:
+                DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
         except Exception as parse_err:
             print(f"Warning: Standard DATABASE_URL parse failed: {parse_err}. Attempting URL sanitization...")
             try:
@@ -107,10 +110,12 @@ if DATABASE_URL and DATABASE_URL.startswith(('postgres://', 'postgresql://')):
                         sanitized_url = f"{scheme}://{user}:{quoted_pass}@{host_part}"
                         DATABASES['default'] = dj_database_url.parse(
                             sanitized_url,
-                            conn_max_age=600,
-                            conn_health_checks=True,
+                            conn_max_age=0 if is_pooler else 600,
+                            conn_health_checks=not is_pooler,
                             ssl_require=True if 'supabase' in sanitized_url else False
                         )
+                        if is_pooler:
+                            DATABASES['default']['DISABLE_SERVER_SIDE_CURSORS'] = True
                         print("Notice: Successfully parsed sanitized DATABASE_URL.")
             except Exception as recovery_err:
                 print(f"Notice: DATABASE_URL recovery failed ({recovery_err}). Falling back to local SQLite.")

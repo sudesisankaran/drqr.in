@@ -35,4 +35,23 @@ def custom_exception_handler(exc, context):
 
         response.data = custom_data
 
+    else:
+        # Unhandled exception (database error, missing table, etc.)
+        import logging
+        logger = logging.getLogger('django')
+        logger.error(f"Unhandled server error: {exc}", exc_info=True)
+
+        err_msg = str(exc)
+        if 'no such table' in err_msg.lower() or 'does not exist' in err_msg.lower():
+            friendly = f"Database tables need migration: {err_msg}. Please run python manage.py migrate."
+        else:
+            friendly = f"Server Error: {err_msg}"
+
+        return Response({
+            'success': False,
+            'status_code': 500,
+            'errors': {'server': [err_msg]},
+            'message': friendly
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     return response
