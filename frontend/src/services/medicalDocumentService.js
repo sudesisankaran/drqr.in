@@ -1,4 +1,4 @@
-import api from './api';
+import api, { API_BASE_URL } from './api';
 
 export const medicalDocumentService = {
   async listDocuments(params = {}) {
@@ -47,7 +47,7 @@ export const medicalDocumentService = {
 
   getDocumentViewUrl(id) {
     const token = localStorage.getItem('access_token');
-    const base = import.meta.env.VITE_API_URL || '/api';
+    const base = API_BASE_URL || '/api';
     return `${base}/medical-records/${id}/download/?download=0${token ? `&token=${encodeURIComponent(token)}` : ''}`;
   }
 };

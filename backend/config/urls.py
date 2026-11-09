@@ -25,7 +25,10 @@ from django.shortcuts import redirect
 
 
 def redirect_to_frontend_qr(request, public_uuid):
-    """Fallback redirect to frontend in case user navigates to backend port 8000."""
+    """Fallback redirect to frontend in case user navigates to backend."""
+    frontend_url = getattr(settings, 'FRONTEND_APP_URL', '').rstrip('/')
+    if frontend_url and not any(h in frontend_url for h in ['127.0.0.1', 'localhost']):
+        return redirect(f"{frontend_url}/patient/qr/{public_uuid}")
     from patients.models import get_network_ip
     raw_host = request.get_host().split(':')[0]
     if raw_host in ['127.0.0.1', 'localhost']:

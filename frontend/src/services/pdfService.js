@@ -1,9 +1,9 @@
-import api from './api';
+import api, { API_BASE_URL } from './api';
 
 export const pdfService = {
   getPdfDirectUrl(recordId, download = false) {
     const token = localStorage.getItem('access_token');
-    const base = import.meta.env.VITE_API_URL || '/api';
+    const base = API_BASE_URL || '/api';
     return `${base}/records/${recordId}/pdf/?download=${download ? '1' : '0'}${token ? `&token=${encodeURIComponent(token)}` : ''}`;
   },
 

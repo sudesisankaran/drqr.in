@@ -1,4 +1,4 @@
-import api from './api';
+import api, { API_BASE_URL } from './api';
 
 export const qrVerifyService = {
   // Fetch public verification details or authorized clinical records
@@ -9,7 +9,7 @@ export const qrVerifyService = {
 
   // Get direct permanent QR image URL
   getQRImageUrl(publicUuid) {
-    const base = import.meta.env.VITE_API_URL || '/api';
+    const base = API_BASE_URL || '/api';
     return `${base}/qr/${publicUuid}/image/`;
   },
 

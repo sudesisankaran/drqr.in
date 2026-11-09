@@ -13,7 +13,7 @@ const getNormalizedApiBaseUrl = () => {
   return cleaned;
 };
 
-const API_BASE_URL = getNormalizedApiBaseUrl();
+export const API_BASE_URL = getNormalizedApiBaseUrl();
 
 const api = axios.create({
   baseURL: API_BASE_URL,
